@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# flake8
+flake8.txt
+
+# pytest
+junit.xml

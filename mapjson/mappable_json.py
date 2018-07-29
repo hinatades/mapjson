@@ -1,5 +1,6 @@
 import os
 import pickle
+from typing import Dict
 
 
 class MapJSON(object):
@@ -7,7 +8,7 @@ class MapJSON(object):
     Mappable JSON
     """
 
-    json_dict = {}
+    json_dict = Dict[str, str]()
     csv_path = ''
     pkl_path = ''
 
