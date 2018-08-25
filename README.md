@@ -1,3 +1,7 @@
+
+![PyPI](https://img.shields.io/pypi/v/mapjson.svg?style=flat-square)
+![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
+
 # mapjson
 
 `mapjson` is mappable JSON object.
