@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from .mappable_json import MapJSON # flake8: NOQA
+from .mapjson import MapJSON # flake8: NOQA
