@@ -1,6 +1,6 @@
 import os
 import pickle
-from typing import Dict
+from typing import Any, List, Dict
 
 
 class MapJSON(object):
@@ -134,4 +134,3 @@ class MapJSON(object):
             else:
                 return_list.append(i)
         return return_list
-
