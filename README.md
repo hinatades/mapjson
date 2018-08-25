@@ -7,18 +7,18 @@
 Using pip
 
 ```
-pip install git+https://github.com/hinatades/mapjson.git
+$ pip install git+https://github.com/hinatades/mapjson.git
 ```
 
 or using pip with PyPI: https://pypi.python.org/pypi/mapjson
 
 ```
-pip install mapjson
+$ pip install mapjson
 ```
 
 ### Usage
 
-```
+```python
 import mapjson
 
 json_data = {}
@@ -29,7 +29,7 @@ mapjson = MapJSON(json_data)
 
 #### map json keys with CSV
 
-```
+```python
 new_input_data = mapjson.map_keys_with_csv(
     'MAPPING_CSV_PATH',
     'MAPPING_PKL_PATH',
