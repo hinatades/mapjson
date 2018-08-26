@@ -1,12 +1,11 @@
+# mapjson
 
 ![PyPI](https://img.shields.io/pypi/v/mapjson.svg?style=flat-square)
 ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
 
-# mapjson
-
 `mapjson` is mappable JSON object.
 
-### Install
+## Installation
 
 Using pip
 
@@ -20,7 +19,7 @@ or using pip with PyPI: https://pypi.python.org/pypi/mapjson
 $ pip install mapjson
 ```
 
-### Usage
+## Usage
 
 ```python
 import mapjson
@@ -29,9 +28,9 @@ json_data = {}
 mapjson = MapJSON(json_data)
 ```
 
-### Example
+## Example
 
-#### map json keys with CSV
+### map json keys with CSV
 
 ```python
 new_input_data = mapjson.map_keys_with_csv(
@@ -41,6 +40,6 @@ new_input_data = mapjson.map_keys_with_csv(
 )
 ```
 
-### Author
+## Author
 
 @hinatades (<hnttisk@gmail.com>)
