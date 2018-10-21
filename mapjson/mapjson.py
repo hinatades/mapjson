@@ -114,49 +114,55 @@ class MapJSON(object):
             with open(self.pkl_path, mode='wb') as f:  # type: ignore
                 pickle.dump(load_list, f)  # type: ignore
 
-    def _get_dict_mapping_keys(self, json_dict: dict, key_befor: str, key_after: str) -> dict:
-        """Get dictionary mapping JSON keys.
+    def _update_return_dict(self, return_dict: dict, return_dict_key: str, value_before_map, my_parent_key: str, key_dict: dict) -> None:
+        """Update return_dict based on dictionary value
+        Args:
+            return_dict (dict): Return dictionary
+            return_dict_key (): Key of return dictionary
+            value_before_map (dict, list, str): Value of the key before mappping
+            my_parent_key (str): parent Dict key before mapping
+            key_dict (dic) Dictionary with keys after mapping
+        Returns:
+            None
+        """
+        if isinstance(value_before_map, dict):
+            return_dict[return_dict_key] = self._get_dict_mapping_keys(value_before_map, my_parent_key, key_dict)
+        elif isinstance(value_before_map, list):
+            return_dict[return_dict_key] = self._get_list_mapping_keys(value_before_map, my_parent_key, key_dict)
+        else:
+            return_dict[return_dict_key] = value_before_map
 
+    def _get_dict_mapping_keys(self, json_dict: dict, my_parent_key: str, key_dict: dict) -> dict: # flake8: NOQA
+        """Get dictionary mapping JSON keys.
         Args:
             json_dict (dict): Dictionary type JSON
-            key_befor (str): Dict key befor mapping
-            key_after (str): Dict key after mapping
-
+            my_parent_key (str): parent Dict key before mapping
+            key_dict (dic) Dictionary with keys after mapping
         Returns:
             dict
         """
         return_dict: Dict[str, Any] = {}
-        new_dict: Dict[str, Any] = {}
-        new_list: List[Any] = []
         for k, v in json_dict.items():
-            if k == key_befor:
-                if isinstance(v, dict):
-                    new_dict = self._get_dict_mapping_keys(v, key_befor, key_after)
-                    return_dict[key_after] = new_dict
-                elif isinstance(v, list):
-                    new_list = self._get_list_mapping_keys(v, key_befor, key_after)
-                    return_dict[key_after] = new_list
+            if k in key_dict.keys():
+                if isinstance(key_dict[k], str):
+                    self._update_return_dict(return_dict, key_dict[k], v, k, key_dict)
+                elif isinstance(key_dict[k], dict):
+                    if my_parent_key in key_dict[k].keys():
+                        self._update_return_dict(return_dict, key_dict[k][my_parent_key], v, k, key_dict)
+                    else:
+                        self._update_return_dict(return_dict, k, v, k, key_dict)
                 else:
-                    return_dict[key_after] = v
+                    raise Exception
             else:
-                if isinstance(v, dict):
-                    new_dict = self._get_dict_mapping_keys(v, key_befor, key_after)
-                    return_dict[k] = new_dict
-                elif isinstance(v, list):
-                    new_list = self._get_list_mapping_keys(v, key_befor, key_after)
-                    return_dict[k] = new_list
-                else:
-                    return_dict[k] = v
+                self._update_return_dict(return_dict, k, v, k, key_dict)
         return return_dict
 
-    def _get_list_mapping_keys(self, dict_list: list, key_befor: str, key_after: str) -> list:
+    def _get_list_mapping_keys(self, dict_list: list, my_parent_key: str, key_dict: dict) -> list:
         """Get list mapping JSON keys.
-
         Args:
             json_dict (dict): Dictionary type JSON
-            key_befor (str): Dict key befor mapping
-            key_after (str): Dict key after mapping
-
+            my_parent_key (str): parent Dict key before mapping
+            key_dic (dict): Dictionary with keys after mapping
         Returns:
             list
         """
