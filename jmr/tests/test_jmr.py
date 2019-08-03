@@ -6,12 +6,12 @@ import unittest
 
 sys.path.append(os.getcwd())
 
-from mapjson import MapJSON
+from jmr import JSONMapper
 from unittest import mock
 
 
-class TestMapJSON(unittest.TestCase):
-    """Test of MapJSON
+class TestJSONMpper(unittest.TestCase):
+    """Test JSONMapper
     """
 
     path = os.path.dirname(os.path.abspath(__file__))
@@ -66,8 +66,8 @@ class TestMapJSON(unittest.TestCase):
         """
         Test whether it is mapped as intended.
         """
-        mapjson = MapJSON(self._get_response())
-        new_json_dict = mapjson.map_keys_with_csv(
+        jmr = JSONMapper(self._get_response())
+        new_json_dict = jmr.map_keys_with_csv(
             self.FIELDS_MAPPING_csv,
             self.FIELDS_MAPPING_pkl,
         )
@@ -82,12 +82,12 @@ class TestMapJSON(unittest.TestCase):
         A case where there is a row in which csv has only one column.
         """
         key_list = ['hogehoge', 'huag, hoge']
-        path = 'mapjson.MapJSON._get_fields_mapper'
+        path = 'jmr.JSONMapper._get_fields_mapper'
         with mock.patch(path) as res_mock:
             res_mock.return_value = key_list
-            mapjson = MapJSON(self._get_response())
+            jmr = JSONMapper(self._get_response())
             with self.assertRaises(Exception):
-                new_json_dict = mapjson.map_keys_with_csv(
+                new_json_dict = jmr.map_keys_with_csv(
                     self.FIELDS_MAPPING_csv,
                     self.FIELDS_MAPPING_pkl,
                 )  # flake8: NOQA

@@ -3,7 +3,7 @@ import pickle
 from typing import Any, List, Dict
 
 
-class MapJSON(object):
+class JSONMapper(object):
     """A class that generates mappable json objects.
     You can map dictionary type JSON keys and values, using CSV or Pikle file.
     In mapping, you do not have to worry about the structure of JSON.

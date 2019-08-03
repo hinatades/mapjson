@@ -1,31 +1,31 @@
-# mapjson
+# jmr
 
-![PyPI](https://img.shields.io/pypi/v/mapjson.svg?style=flat-square)
+![PyPI](https://img.shields.io/pypi/v/jmr.svg?style=flat-square)
 ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)
 
-`mapjson` is mappable JSON object.
+`jmr` is mappable JSON object.
 
 ## Installation
 
 Using pip
 
 ```
-$ pip install git+https://github.com/hinatades/mapjson.git
+$ pip install git+https://github.com/hinatades/jmr.git
 ```
 
-or using pip with PyPI: https://pypi.python.org/pypi/mapjson
+or using pip with PyPI: https://pypi.python.org/pypi/jmr
 
 ```
-$ pip install mapjson
+$ pip install jmr
 ```
 
 ## Usage
 
 ```python
-import mapjson
+import jmr
 
 json_data = {}
-mapjson = MapJSON(json_data)
+jmr = JSONMapper(json_data)
 ```
 
 ## Example
@@ -33,7 +33,7 @@ mapjson = MapJSON(json_data)
 ### map json keys with CSV
 
 ```python
-new_input_data = mapjson.map_keys_with_csv(
+new_input_data = jmr.map_keys_with_csv(
     'MAPPING_CSV_PATH',
     'MAPPING_PKL_PATH',
     [1, 0]
