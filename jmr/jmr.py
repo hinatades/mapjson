@@ -37,7 +37,7 @@ class JSONMapper(object):
     def __init__(self, json: dict) -> None:
         self.json_dict = json
 
-    def map_keys_with_csv(self, csv_path: str, pkl_path: str='.', map_cols: list=[0, 1]) -> dict:
+    def map_keys_with_csv(self, csv_path: str, pkl_path: str = '.', map_cols: list = [0, 1]) -> dict:  # noqa
         """Map JSON keys with CSV file
         CSV is used to create a dictionary with keys after mapping
         It is written as key_dict below.
@@ -114,7 +114,7 @@ class JSONMapper(object):
             with open(self.pkl_path, mode='wb') as f:  # type: ignore
                 pickle.dump(load_list, f)  # type: ignore
 
-    def _update_return_dict(self, return_dict: dict, return_dict_key: str, value_before_map, my_parent_key: str, key_dict: dict) -> None:
+    def _update_return_dict(self, return_dict: dict, return_dict_key: str, value_before_map, my_parent_key: str, key_dict: dict) -> None:  # noqa
         """Update return_dict based on dictionary value
         Args:
             return_dict (dict): Return dictionary
@@ -126,13 +126,15 @@ class JSONMapper(object):
             None
         """
         if isinstance(value_before_map, dict):
-            return_dict[return_dict_key] = self._get_dict_mapping_keys(value_before_map, my_parent_key, key_dict)
+            return_dict[return_dict_key] = self._get_dict_mapping_keys(
+                value_before_map, my_parent_key, key_dict)
         elif isinstance(value_before_map, list):
-            return_dict[return_dict_key] = self._get_list_mapping_keys(value_before_map, my_parent_key, key_dict)
+            return_dict[return_dict_key] = self._get_list_mapping_keys(
+                value_before_map, my_parent_key, key_dict)
         else:
             return_dict[return_dict_key] = value_before_map
 
-    def _get_dict_mapping_keys(self, json_dict: dict, my_parent_key: str, key_dict: dict) -> dict: # flake8: NOQA
+    def _get_dict_mapping_keys(self, json_dict: dict, my_parent_key: str, key_dict: dict) -> dict:
         """Get dictionary mapping JSON keys.
         Args:
             json_dict (dict): Dictionary type JSON
@@ -148,7 +150,8 @@ class JSONMapper(object):
                     self._update_return_dict(return_dict, key_dict[k], v, k, key_dict)
                 elif isinstance(key_dict[k], dict):
                     if my_parent_key in key_dict[k].keys():
-                        self._update_return_dict(return_dict, key_dict[k][my_parent_key], v, k, key_dict)
+                        self._update_return_dict(
+                            return_dict, key_dict[k][my_parent_key], v, k, key_dict)
                     else:
                         self._update_return_dict(return_dict, k, v, k, key_dict)
                 else:
